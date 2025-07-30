@@ -1,0 +1,29 @@
+---
+strategy: polling
+no_screen_padding: 'no'
+dark_mode: 'no'
+static_data: ''
+polling_verb: get
+polling_url: https://cdt.hafas.de/opendata/apiserver/departureBoard?accessId={{accessId}}&lang=en&id={{stopId}}&format=json&maxJourneys=15&duration=1439
+polling_headers: ''
+polling_body: ''
+id: 129030
+custom_fields:
+- keyname: accessId
+  field_type: string
+  name: API Key
+  description: API Key for the Mobiliteit API.
+  help_text: Contact opendata-api@atp.etat.lu to get your personal API key.
+- keyname: stopId
+  field_type: string
+  name: Stop ID
+  description: Stop ID from the Mobiliteit API.
+  help_text: The Stop ID can be found using the <a href="link-to-api" target="https://data.public.lu/en/datasets/api-mobiliteit-lu/" class="underline">guide</a> of the data.public.lu administration.
+- keyname: authorBio
+  name: About This Plugin
+  field_type: author_bio
+  description: This recipe ca be used to show a timetable of a bus stop using the Mobiliteit.lu API.
+  github_url: https://github.com/SourceDiver42
+  email_address: sourcediver42@pm.me 
+name: Mobiliteit.lu Checker
+refresh_interval: 15

@@ -1,0 +1,139 @@
+{% if trmnl.plugin_settings.custom_fields_values.size != 2 or Departure == nil or Departure == empty %}
+<div class="layout layout--col layout--center-x layout--center-y">
+    <span class="title">Please check your variables in order to proceed.</span>
+    <table class="table table--bordered table--compact w--96">
+
+        <tbody>
+            <tr>
+                <td class="text--center">
+                    <span class="label">accessId</span>
+                </td>
+                <td class="text--center">
+                    {% if trmnl.plugin_settings.custom_fields_values.accessId %}
+                    <span class="label">Exists</span>
+                    {% else %}
+                    <span class="label label--inverted">Missing</span>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td class="text--center"> <span class="label">stopId</span>
+                </td>
+                <td class="text--center">
+                    {% if trmnl.plugin_settings.custom_fields_values.stopId %}
+                    <span class="label">Exists</span>
+                    {% else %}
+                    <span class="label label--inverted">Missing</span>
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+{% else %}
+<div class="layout layout--top">
+    <div class="stretch-y">
+
+
+        <table class="table table--bordered table--compact">
+            <thead>
+                <tr>
+                    <th><span class="label label--bold">Time</span></th>
+                    <th><span class="label label--bold">Direction</span></th>
+                    {% if Departure[0].Product[0].catOut != 'Bus' %}
+                    <th><span class="label label--bold">Platform</span></th>
+                    {% endif %}
+                    <th><span class="label label--bold">Delay</span></th>
+                    <th><span class="label label--bold">Line</span></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for item in Departure %}
+                {% assign temp = (item.name | split: " ") %}
+                {% assign mode = temp[0] %}
+                {% assign delay_minutes = item.delay | divided_by: 60 %}
+                <tr>
+                    <td><span class="label">{{ item.time | date: "%H:%M" }}</span></td>
+                    <td><span class="label">{{ item.direction }}</span></td>
+                    {% if Departure[0].Product[0].catOut != 'Bus' %}
+
+                    <td>
+                        <span class="label">
+                            {{ item.platform }}
+                        </span>
+                    </td>
+                    {% endif %}
+
+                    <td>
+                        {% assign scheduled = item.time %}
+                        {% assign realtime = item.rtTime %}
+                        {% assign sch_date = item.date %}
+                        {% assign rt_date = item.rtDate %}
+
+                        <!-- Check if RT values exist -->
+                        {% if realtime and realtime != "" and rt_date and rt_date != "" %}
+
+                        <!-- Parse hours and minutes -->
+                        {% assign sch_hour = scheduled | slice: 0, 2 | plus: 0 %}
+                        {% assign sch_min = scheduled | slice: 3, 2 | plus: 0 %}
+                        {% assign rt_hour = realtime | slice: 0, 2 | plus: 0 %}
+                        {% assign rt_min = realtime | slice: 3, 2 | plus: 0 %}
+
+                        <!-- Convert to total minutes -->
+                        {% assign sch_total = sch_hour | times: 60 | plus: sch_min %}
+                        {% assign rt_total = rt_hour | times: 60 | plus: rt_min %}
+
+                        <!-- Handle date difference -->
+                        {% if sch_date != rt_date %}
+                        {% assign rt_total = rt_total | plus: 1440 %}
+                        {% endif %}
+
+                        <!-- Calculate delay -->
+                        {% assign delay = rt_total | minus: sch_total %}
+
+                        <!-- Show result -->
+                        {% if delay > 0 %}
+                        <span class="label label--inverted">
+                            Delayed by {{ delay }} min (RT: {{ realtime }})
+                        </span>
+                        {% else %}
+                        <span class="label">
+                            On time
+                        </span>
+                        {% endif %}
+
+                        {% else %}
+                        <!-- No real-time data -->
+                        <span class="label">
+                            Scheduled
+                        </span>
+                        {% endif %}
+
+                    </td>
+                    <td>
+                        <span class="label">
+                            {{item.Product[0].line}}
+                        </span>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</div>
+{% endif %}
+<div class="title_bar">
+    {% assign stop = Departure[0].stop | truncate: 45 %}
+    <span class="title">
+        Mobiliteit.lu |
+        {% if Departure[0].stop and Departure[0].stop != "" %}
+        {{ Departure[0].stop | truncate: 45 }}
+        {% else %}
+        Unknown stop or unknown key
+        {% endif %}
+    </span>
+    <span class="instance">{{ "now" | date: '%s' | plus: trmnl.user.utc_offset | date: "%Y-%m-%d %H:%M" }}</span>
+</div>
