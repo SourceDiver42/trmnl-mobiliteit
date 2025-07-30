@@ -9,6 +9,12 @@ polling_headers: ''
 polling_body: ''
 id: 129030
 custom_fields:
+- keyname: authorBio
+  name: About This Plugin
+  field_type: author_bio
+  description: This recipe ca be used to show a timetable of a bus stop using the Mobiliteit.lu API.
+  github_url: https://github.com/SourceDiver42/trmnl-mobiliteit
+  email_address: sourcediver42@pm.me
 - keyname: accessId
   field_type: string
   name: API Key
@@ -19,11 +25,5 @@ custom_fields:
   name: Stop ID
   description: Stop ID from the Mobiliteit API.
   help_text: The Stop ID can be found using the <a href="link-to-api" target="https://data.public.lu/en/datasets/api-mobiliteit-lu/" class="underline">guide</a> of the data.public.lu administration.
-- keyname: authorBio
-  name: About This Plugin
-  field_type: author_bio
-  description: This recipe ca be used to show a timetable of a bus stop using the Mobiliteit.lu API.
-  github_url: https://github.com/SourceDiver42
-  email_address: sourcediver42@pm.me 
 name: Mobiliteit.lu Checker
 refresh_interval: 15
