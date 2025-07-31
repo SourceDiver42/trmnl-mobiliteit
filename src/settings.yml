@@ -12,7 +12,7 @@ custom_fields:
 - keyname: authorBio
   name: About This Plugin
   field_type: author_bio
-  description: This recipe ca be used to show a timetable of a bus stop using the Mobiliteit.lu API.
+  description: This recipe can be used to show a timetable of a bus stop using the Mobiliteit.lu API.
   github_url: https://github.com/SourceDiver42/trmnl-mobiliteit
   email_address: sourcediver42@pm.me
 - keyname: accessId
