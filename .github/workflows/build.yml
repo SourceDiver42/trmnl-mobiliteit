@@ -48,7 +48,7 @@ jobs:
  
   deploy:
     name: Deploy to TRMNL
-    needs: [check-secret, check-version, create-release]
+    needs: [check-secret]
     runs-on: ubuntu-latest
     if: success() && needs.check-secret.outputs.has-secret == 'true'
     steps:
