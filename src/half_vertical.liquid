@@ -2,7 +2,6 @@
 <div class="layout layout--col layout--center-x layout--center-y">
     <span class="title">Please check your variables in order to proceed.</span>
     <table class="table table--bordered table--compact w--96">
-
         <tbody>
             <tr>
                 <td class="text--center">
@@ -34,8 +33,6 @@
 {% else %}
 <div class="layout layout--top">
     <div class="stretch-y">
-
-
         <table class="table table--bordered table--compact">
             <thead>
                 <tr>
@@ -48,12 +45,11 @@
                 </tr>
             </thead>
             <tbody>
-
                 {% for item in Departure %}
                 {% assign temp = (item.name | split: " ") %}
                 {% assign mode = temp[0] %}
                 {% assign delay_minutes = item.delay | divided_by: 60 %}
-                <tr>
+                <tr class="h--[43px]">
                     <td>
                     {% assign scheduled = item.time %}
                         {% assign realtime = item.rtTime %}
@@ -103,7 +99,6 @@
                 {% endfor %}
             </tbody>
         </table>
-
     </div>
 </div>
 {% endif %}

@@ -19,11 +19,11 @@ custom_fields:
   field_type: string
   name: API Key
   description: API Key for the Mobiliteit API.
-  help_text: Contact opendata-api@atp.etat.lu to get your personal API key.
+  help_text: Contact <a href="mailto:opendata-api@atp.etat.lu">opendata-api@atp.etat.lu</a> to get your personal API key.
 - keyname: stopId
   field_type: string
   name: Stop ID
   description: Stop ID from the Mobiliteit API.
-  help_text: The Stop ID can be found using the <a href="link-to-api" target="https://data.public.lu/en/datasets/api-mobiliteit-lu/" class="underline">guide</a> of the data.public.lu administration.
+  help_text: The Stop ID can be found using the <a href="https://data.public.lu/en/datasets/api-mobiliteit-lu/" target="https://data.public.lu/en/datasets/api-mobiliteit-lu/" class="underline">guide</a> of the data.public.lu administration.
 name: Mobiliteit.lu Checker
 refresh_interval: 15

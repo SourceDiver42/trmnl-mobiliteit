@@ -2,7 +2,6 @@
 <div class="layout layout--col layout--center-x layout--center-y">
     <span class="title">Please check your variables in order to proceed.</span>
     <table class="table table--bordered table--compact w--96">
-
         <tbody>
             <tr>
                 <td class="text--center">
@@ -29,13 +28,10 @@
             </tr>
         </tbody>
     </table>
-
 </div>
 {% else %}
 <div class="layout layout--top">
     <div class="stretch-y">
-
-
         <table class="table table--bordered table--compact">
             <thead>
                 <tr>
@@ -49,7 +45,6 @@
                 </tr>
             </thead>
             <tbody>
-
                 {% for item in Departure %}
                 {% assign temp = (item.name | split: " ") %}
                 {% assign mode = temp[0] %}
@@ -121,7 +116,6 @@
                 {% endfor %}
             </tbody>
         </table>
-
     </div>
 </div>
 {% endif %}
